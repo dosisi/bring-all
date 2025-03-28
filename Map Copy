@@ -1,0 +1,69 @@
+local options = {
+    noscripts = false,
+    nodecode = false,
+    mode = "full",
+    decomptype = "DV",
+    scriptcache = true,
+    ReadMe = true,
+    IgnoreDefaultProperties = false,
+    SaveNotCreatable = true,
+    timeout = 30,
+    AntiIdle = true,
+    TreatUnionsAsParts = false
+}
+
+local serverscript_options = {
+    try_require = true,
+    hook_require = true,
+    hook_context = true,
+    deep_search = true,
+    bypass_env = true
+}
+
+-- 설정 병합
+for k, v in pairs(serverscript_options) do
+    options[k] = v
+end
+
+local date = os.date("*t")
+local filename = string.format("gamecopy%d-%d-%d_%d-%d-%d.rbxl", 
+    date.year, date.month, date.day, date.hour, date.min, date.sec)
+
+print("게임 복제 시작...")
+print("이 작업은 게임의 크기에 따라 시간이 걸릴 수 있습니다.")
+
+print("게임 정보:")
+print("  플레이스 ID: " .. game.PlaceId)
+print("  플레이스 버전: " .. game.PlaceVersion)
+print("  게임 이름: " .. game.Name)
+
+local success, result = pcall(function()
+    return saveinstance(options)
+end)
+
+if success then
+    writefile(filename, result)
+    print("게임 복제 완료! 파일명: " .. filename)
+    print("파일 크기: " .. string.format("%.2f", #result / 1024 / 1024) .. " MB")
+else
+    print("게임 복제 실패: " .. tostring(result))
+
+    print("대안 방법으로 시도합니다...")
+
+    local simplified_options = {
+        noscripts = false,
+        mode = "optimized",
+        scriptcache = true
+    }
+
+    local success2, result2 = pcall(function()
+        return saveinstance(simplifiedoptions)
+    end)
+
+    if success2 then
+        writefile("simplified" .. filename, result2)
+        print("단순화된 복제 완료! 파일명: simplified_" .. filename)
+    else
+        print("모든 복제 시도 실패. 오류: " .. tostring(result2))
+    end
+end
