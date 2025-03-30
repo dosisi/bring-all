@@ -99,7 +99,7 @@ local Button = Tab:CreateButton({
 local Button = Tab:CreateButton({
    Name = "카운터 블록스",
    Callback = function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/toasty-dev/pissblox/main/solaris_bootstrapper.lua",true))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/fliskScript/jaran.vip/main/free.lua"))()
    end,
 })
 
@@ -279,9 +279,16 @@ local Button = Tab:CreateButton({
 })
 
 local Button = Tab:CreateButton({
-   Name = "라이벌",
+   Name = "라이벌(좋은 실행기로만)",
    Callback = function()
-   loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e945f55997c4240abc865c0bcc2136c5.lua"))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Nivex123456/main/refs/heads/main/Loader.lua"))()
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "라이벌(왠만한 실행기론 다 됨)",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubRivals"))()
    end,
 })
 
@@ -366,5 +373,48 @@ local Button = Tab:CreateButton({
    Name = "한국머더(by solara)",
    Callback = function()
    loadstring(game:HttpGet('https://raw.githubusercontent.com/minute124/RH-666-/refs/heads/main/Protected_7087928499639776.lua'))()
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "보물선 만들기",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/102KIRA/W/refs/heads/main/W.1.2IMsigmA"))()
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "벌떼 시뮬레이터",
+   Callback = function()
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/DevKron/Kron_Hub/refs/heads/main/version_1.0'))("")
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Blox Fruits",
+   Callback = function()
+   loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/a5c3af437cd698d64379cf75cacb9281.lua"))()
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "킹피스",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/dosisi/bring-all/refs/heads/main/%ED%82%B9%ED%94%BC%EC%8A%A4"))()
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "능력 전쟁(Ability Wars)",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Chavels123/Loader/refs/heads/main/loader.lua"))()
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "데스 볼",
+   Callback = function()
+   script_key="키 여기에";
+   (loadstring or load)(game:HttpGet("https://getnative.cc/script/loader"))()
    end,
 })
