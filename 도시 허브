@@ -146,14 +146,14 @@ local Button = Tab:CreateButton({
 })
 
 local Button = Tab:CreateButton({
-   Name = "반물사(블리츠 크랙)",
+   Name = "반물사(블리츠 = 크랙)",
    Callback = function()
    loadstring(game:HttpGet("https://you.whimper.xyz/blitz"))()
    end,
 })
 
 local Button = Tab:CreateButton({
-   Name = "반물사(무료)",
+   Name = "반물사(블리츠 = 무료)",
    Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/BlizTBr/scripts/main/FTAP.lua"))()
    end,
