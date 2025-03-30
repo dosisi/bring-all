@@ -314,7 +314,7 @@ local Button = Tab:CreateButton({
 })
 
 local Button = Tab:CreateButton({
-   Name = "가강전(좋은 실행기로만)",
+   Name = "가강전(진짜 실행기로만)",
    Callback = function()
    loadstring(game:HttpGet("https://nicuse.xyz/MainHub.lua"))()
    end,
