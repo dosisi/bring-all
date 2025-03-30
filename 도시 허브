@@ -141,7 +141,7 @@ local Button = Tab:CreateButton({
 local Button = Tab:CreateButton({
    Name = "피쉬",
    Callback = function()
-   loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/613dec94f32fac6f2faeb40da4c13d2b.lua"))()
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/Catto-YFCN/Lunor_Dependencies/refs/heads/main/Loader'))()
    end,
 })
 
