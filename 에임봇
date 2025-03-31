@@ -31,6 +31,7 @@ UIStroke.Transparency = 0 -- 완전 보이게 설정
 -- 현재 타겟 고정 변수
 local lockedTarget = nil
 local isRightClicking = false -- 우클릭 상태 감지 변수
+local isFixedEnabled = true -- 고정 가능 여부를 관리하는 변수
 
 -- 벽 뒤에 있는지 확인하는 함수
 local function IsTargetVisible(target)
@@ -87,10 +88,17 @@ UserInputService.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton2 then
         isRightClicking = true
         -- 우클릭할 때 가장 가까운 플레이어에게 고정
-        local target = GetClosestPlayerInFOV()
-        if target then
-            lockedTarget = target
+        if isFixedEnabled then
+            local target = GetClosestPlayerInFOV()
+            if target then
+                lockedTarget = target
+            end
         end
+    elseif input.KeyCode == Enum.KeyCode.V then
+        -- V 키를 눌렀을 때 고정 가능 여부를 전환하고 원을 보이거나 숨김
+        isFixedEnabled = not isFixedEnabled
+        Circle.Visible = isFixedEnabled
+        lockedTarget = nil -- 고정 해제
     end
 end)
 
