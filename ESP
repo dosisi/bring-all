@@ -73,7 +73,7 @@ local function onCharacterAdded(character)
     local player = game.Players:GetPlayerFromCharacter(character)
     if player then
         task.wait(1) -- 로딩 시간 확보
-        if chamsEnabled then
+        if chamsEnabled and player ~= localPlayer then
             applyChams(character)
             displayNameAndHealth(character, player)
         end
@@ -109,7 +109,7 @@ userInputService.InputBegan:Connect(function(input, gameProcessed)
         -- Chams와 이름/체력을 끄고 켜기
         for _, player in pairs(players:GetPlayers()) do
             if player.Character then
-                if chamsEnabled then
+                if chamsEnabled and player ~= localPlayer then
                     applyChams(player.Character)
                     displayNameAndHealth(player.Character, player)
                 else
