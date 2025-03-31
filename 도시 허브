@@ -41,9 +41,16 @@ local Button = Tab:CreateButton({
 })
 
 local Button = Tab:CreateButton({
-   Name = "에임 봇(V를 눌러 껏다 켰다)",
+   Name = "에임 봇(V를 눌러서 껏다 켰다)",
    Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/dosisi/bring-all/refs/heads/main/%EC%97%90%EC%9E%84%EB%B4%87"))()    
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "ESP(G를 눌러서 껏다 켰다)",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/dosisi/bring-all/refs/heads/main/ESP"))()
    end,
 })
 
