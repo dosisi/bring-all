@@ -16,7 +16,7 @@ Circle.Size = UDim2.new(0, 400, 0, 400) -- FOV 400 크기
 Circle.Position = UDim2.new(0.5, -200, 0.5, -200) -- 화면 중앙 (400/2 = 200)
 Circle.BackgroundTransparency = 1 -- 내부 투명
 Circle.ZIndex = 10
-Circle.Visible = true
+Circle.Visible = false -- 기본적으로 원을 숨김
 
 -- 둥근 테두리 만들기
 local UICorner = Instance.new("UICorner", Circle)
@@ -31,7 +31,8 @@ UIStroke.Transparency = 0 -- 완전 보이게 설정
 -- 현재 타겟 고정 변수
 local lockedTarget = nil
 local isRightClicking = false -- 우클릭 상태 감지 변수
-local isFixedEnabled = true -- 고정 가능 여부를 관리하는 변수
+local isFixedEnabled = false -- 고정 기능이 활성화된 상태를 관리하는 변수
+local isLockingEnabled = false -- 고정이 가능한 상태인지 여부를 관리하는 변수
 
 -- 벽 뒤에 있는지 확인하는 함수
 local function IsTargetVisible(target)
@@ -88,7 +89,7 @@ UserInputService.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton2 then
         isRightClicking = true
         -- 우클릭할 때 가장 가까운 플레이어에게 고정
-        if isFixedEnabled then
+        if isLockingEnabled then
             local target = GetClosestPlayerInFOV()
             if target then
                 lockedTarget = target
@@ -98,6 +99,7 @@ UserInputService.InputBegan:Connect(function(input)
         -- V 키를 눌렀을 때 고정 가능 여부를 전환하고 원을 보이거나 숨김
         isFixedEnabled = not isFixedEnabled
         Circle.Visible = isFixedEnabled
+        isLockingEnabled = isFixedEnabled -- 고정 가능 여부도 V 키로 전환
         lockedTarget = nil -- 고정 해제
     end
 end)
@@ -105,12 +107,24 @@ end)
 UserInputService.InputEnded:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton2 then
         isRightClicking = false
+        lockedTarget = nil -- 우클릭을 떼면 고정 해제
     end
 end)
 
 -- 타겟을 계속 추적하며 고정
 RunService.RenderStepped:Connect(function()
-    if isRightClicking and lockedTarget then
+    if isRightClicking and isLockingEnabled then
+        -- 가장 가까운 플레이어를 찾고 원 안에 들어오면 고정
+        local closestPlayer = GetClosestPlayerInFOV()
+        if closestPlayer and IsTargetVisible(closestPlayer) then
+            -- 원 안에 들어왔으면 고정
+            if (Vector2.new(Camera:WorldToViewportPoint(closestPlayer.Position).X, Camera:WorldToViewportPoint(closestPlayer.Position).Y) - Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)).magnitude <= 200 then
+                lockedTarget = closestPlayer
+            end
+        end
+    end
+
+    if lockedTarget then
         -- 고정된 플레이어가 벽 너머로 가면 고정 해제
         if not IsTargetVisible(lockedTarget) then
             lockedTarget = nil
@@ -118,7 +132,5 @@ RunService.RenderStepped:Connect(function()
             -- 고정된 플레이어가 시야 안에 있고 우클릭이 활성화된 경우 카메라 고정
             Camera.CFrame = CFrame.new(Camera.CFrame.Position, lockedTarget.Position)
         end
-    elseif not isRightClicking then
-        lockedTarget = nil -- 우클릭을 떼면 타겟 해제
     end
 end)
