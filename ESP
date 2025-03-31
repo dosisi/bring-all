@@ -1,5 +1,8 @@
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
+local userInputService = game:GetService("UserInputService")
+
+local chamsEnabled = true  -- Chams와 이름/체력을 켜고 끄는 토글 변수
 
 -- Chams 적용 함수
 local function applyChams(character)
@@ -70,8 +73,10 @@ local function onCharacterAdded(character)
     local player = game.Players:GetPlayerFromCharacter(character)
     if player then
         task.wait(1) -- 로딩 시간 확보
-        applyChams(character)
-        displayNameAndHealth(character, player)
+        if chamsEnabled then
+            applyChams(character)
+            displayNameAndHealth(character, player)
+        end
     end
 end
 
@@ -79,8 +84,10 @@ end
 for _, player in pairs(players:GetPlayers()) do
     if player ~= localPlayer then
         if player.Character then
-            applyChams(player.Character)
-            displayNameAndHealth(player.Character, player)
+            if chamsEnabled then
+                applyChams(player.Character)
+                displayNameAndHealth(player.Character, player)
+            end
         end
         player.CharacterAdded:Connect(onCharacterAdded)
     end
@@ -90,5 +97,43 @@ end
 players.PlayerAdded:Connect(function(player)
     if player ~= localPlayer then
         player.CharacterAdded:Connect(onCharacterAdded)
+    end
+end)
+
+-- G 키를 눌렀을 때 Chams와 이름/체력 표시를 토글하는 함수
+userInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Enum.KeyCode.G then
+        chamsEnabled = not chamsEnabled  -- 토글 변수 변경
+        
+        -- Chams와 이름/체력을 끄고 켜기
+        for _, player in pairs(players:GetPlayers()) do
+            if player.Character then
+                if chamsEnabled then
+                    applyChams(player.Character)
+                    displayNameAndHealth(player.Character, player)
+                else
+                    -- Chams와 이름/체력 표시 제거
+                    for _, part in pairs(player.Character:GetChildren()) do
+                        if part:IsA("BasePart") then
+                            for _, adornment in pairs(part:GetChildren()) do
+                                if adornment:IsA("BoxHandleAdornment") then
+                                    adornment:Destroy()
+                                end
+                            end
+                        end
+                    end
+                    -- BillboardGui 제거
+                    local head = player.Character:FindFirstChild("Head")
+                    if head then
+                        for _, billboard in pairs(head:GetChildren()) do
+                            if billboard:IsA("BillboardGui") then
+                                billboard:Destroy()
+                            end
+                        end
+                    end
+                end
+            end
+        end
     end
 end)
