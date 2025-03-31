@@ -16,7 +16,7 @@ Circle.Size = UDim2.new(0, 400, 0, 400) -- FOV 400 크기
 Circle.Position = UDim2.new(0.5, -200, 0.5, -200) -- 화면 중앙 (400/2 = 200)
 Circle.BackgroundTransparency = 1 -- 내부 투명
 Circle.ZIndex = 10
-Circle.Visible = false -- 기본적으로 원을 숨김
+Circle.Visible = true -- 게임 시작 시 원을 보이도록 설정
 
 -- 둥근 테두리 만들기
 local UICorner = Instance.new("UICorner", Circle)
