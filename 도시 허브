@@ -41,6 +41,13 @@ local Button = Tab:CreateButton({
 })
 
 local Button = Tab:CreateButton({
+   Name = "에임 봇",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/dosisi/bring-all/refs/heads/main/%EC%97%90%EC%9E%84%EB%B4%87"))()    
+   end,
+})
+
+local Button = Tab:CreateButton({
    Name = "먼지 나는 여행",
    Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/xxqLgnd/Utilities/main/DustyTrip",true))()
