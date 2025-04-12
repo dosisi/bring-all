@@ -159,12 +159,6 @@ local Button = Tab:CreateButton({
    end,
 })
 
-local Button = Tab:CreateButton({
-   Name = "반물사(블리츠 = 크랙)",
-   Callback = function()
-   loadstring(game:HttpGet("https://you.whimper.xyz/blitz"))()
-   end,
-})
 
 local Button = Tab:CreateButton({
    Name = "반물사(블리츠 = 무료)",
@@ -184,13 +178,6 @@ local Button = Tab:CreateButton({
    Name = "반물사(VHS = VF 무료)",
    Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/fgdergewrgegr/ftap/refs/heads/main/VHS%20VF"))()
-   end,
-})
-
-local Button = Tab:CreateButton({
-   Name = "반물사(엘리시움 무료)",
-   Callback = function()
-   loadstring(game:HttpGet('https://raw.githubusercontent.com/cool83birdcarfly02six/ElysiumFree/refs/heads/main/README.md'))()
    end,
 })
 
